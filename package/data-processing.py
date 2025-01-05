@@ -40,7 +40,7 @@ def lambda_handler(event, context):
 
     for record in event["Records"]:
         # Decode the Kinesis data from base64 and load it as JSON
-        pk = record["kinesis"]["partitionKey"]
+        #pk = record["kinesis"]["partitionKey"]
         msg = base64.b64decode(record["kinesis"]["data"]).decode("utf-8")
         data = json.loads(msg)
 
