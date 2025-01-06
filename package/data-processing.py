@@ -21,7 +21,6 @@ import pandas as pd # type: ignore
 import json # type: ignore
 import base64 # type: ignore
 import numpy as np # type: ignore
-from tabulate import tabulate # type: ignore
 
 
 # Initialize DynamoDB resource and Kinesis client
@@ -38,10 +37,9 @@ def lambda_handler(event, context):
     van_location_data = []
     weather_data = []
 
-    for record in event["Records"]:
+    for record in event['Records']:
         # Decode the Kinesis data from base64 and load it as JSON
-        #pk = record["kinesis"]["partitionKey"]
-        msg = base64.b64decode(record["kinesis"]["data"]).decode("utf-8")
+        msg = base64.b64decode(record['kinesis']['data']).decode('utf-8')
         data = json.loads(msg)
 
         for item in data:
@@ -89,12 +87,6 @@ def lambda_handler(event, context):
 
     bus_weather_correlated_data['delay_time'] = np.random.randint(0, 10, len(bus_weather_correlated_data))
 
-    #print(bus_weather_correlated_data)
-
-    # insert bus_weather_correlated_data in a DynamoDB table (INSIGHTS TABLE)
-    insights_table.put_item(bus_weather_correlated_data)
-
-
     # Next we need to correlate van services with bus locations and the number of waiting passengers.
     # Check whether a van is needed depending on the condition
 
@@ -106,6 +98,8 @@ def lambda_handler(event, context):
 
     bus_weather_correlated_data["van_required"] = bus_weather_correlated_data.apply(calculate_van_needed, axis=1)
 
+    # insert bus_weather_correlated_data in a DynamoDB table (INSIGHTS TABLE)
+    insights_table.put_item(bus_weather_correlated_data)
 
     #print("\n=== Full Data with Van Requirements ===")
     #print(tabulate(bus_weather_correlated_data, headers="keys", tablefmt="pretty"))
