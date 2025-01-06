@@ -1,14 +1,14 @@
 
 # Archive a processing.py into a zip file
 locals {
-  lambda_processing_function = "processing_func/processing.zip"
+  lambda_processing_function = "processing_func/package.zip"
 }
 
 
 # Upload Lambda zip to S3
 resource "aws_s3_object" "lambda_processing" {
   bucket = aws_s3_bucket.lambda_bucket.id
-  key    = "data-processing.zip"
+  key    = "package.zip"
   source = local.lambda_processing_function
   etag   = filemd5(local.lambda_processing_function)
 }
