@@ -33,14 +33,22 @@ insights_table = dynamodb.Table('insights_table')
 # Define the lambda handler function
 def lambda_handler(event, context):
 
+    # Initialize lists to store bus, van, and weather data
     bus_location_data = []
     van_location_data = []
     weather_data = []
 
-    for record in event['Records']:
+    # Decode the Kinesis data from base64 and load it as JSON
+    data = None
+    decoded_record_data = [base64.b64decode(record['kinesis']['data']) for record in event['Records']]
+    for record in decoded_record_data:
+        data = json.loads(record)
+
+    
+    #for record in event['Records']:
         # Decode the Kinesis data from base64 and load it as JSON
-        msg = base64.b64decode(record['kinesis']['data']).decode('utf-8')
-        data = json.loads(msg)
+     #   msg = base64.b64decode(record['kinesis']['data']).decode('utf-8')
+      #  data = json.loads(msg)
 
         for item in data:
             # Validate the data, Ensuring data quality by filtering out incomplete or malformed data.
