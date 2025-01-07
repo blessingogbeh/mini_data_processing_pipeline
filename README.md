@@ -81,6 +81,7 @@ Cloudwatch_Dashboard - takes metrics from the dynamoDB table and displays it in 
 We can push data into our kinesis data streams and let the pipeline handle the rest.
 In a CLI opened in ./mdpp, run the following command.
 ```bash
+
 aws kinesis put-records --stream-name "bus-location-stream"  --cli-input-json file://sample_data/bus_location_data.json --region us-east-1
 
 aws kinesis put-records --stream-name "van-location-stream"  --cli-input-json file://sample_data/van_location_data.json --region us-east-1
