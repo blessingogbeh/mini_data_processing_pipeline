@@ -20,6 +20,12 @@
         "Resource": "*"
       },
       {
+        "Sid": "Stmt1736323831561",
+        "Action": "*",
+        "Effect": "Allow",
+        "Resource": "*"
+      },
+      {
         "Sid": "Stmt1732686322536",
         "Action": "s3:*",
         "Effect": "Allow",
