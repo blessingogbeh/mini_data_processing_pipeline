@@ -19,7 +19,7 @@ MDPP is a real-time data processing pipeline that correlates bus locations with 
 
 
 ## Prerequisites
-- Python 3.11+
+- Python 3.8
 - Terraform v1.9.8
 - Create AWS [Account](https://console.aws.amazon.com/) 
 - Download and Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)

@@ -27,7 +27,7 @@ resource "aws_lambda_function" "processing_lambda" {
 
   source_code_hash = filebase64sha256(local.lambda_processing_function)
 
-  runtime = "python3.11"
+  runtime = "python3.8"
 
   environment {
     variables = {
