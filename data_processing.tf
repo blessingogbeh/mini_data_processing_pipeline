@@ -27,7 +27,7 @@ resource "aws_lambda_function" "processing_lambda" {
 
   source_code_hash = filebase64sha256(local.lambda_processing_function)
 
-  runtime = "python3.8"
+  runtime = "python3.9"
 
   environment {
     variables = {
@@ -36,9 +36,10 @@ resource "aws_lambda_function" "processing_lambda" {
       VAN_TABLE           = "van_location_data"
       PASSENGER_THRESHOLD = 50
       DELAY_THRESHOLD     = 300
-      VAN_STREAM          = aws_kinesis_stream.data_stream[0].name
-      BUS_STREAM          = aws_kinesis_stream.data_stream[1].name
-      WEATHER_STREAM      = aws_kinesis_stream.data_stream[2].name
+      DATA_STREAM         = aws_kinesis_stream.data_stream.name
+      #VAN_STREAM          = aws_kinesis_stream.data_stream[0].name
+      #BUS_STREAM          = aws_kinesis_stream.data_stream[1].name
+      #WEATHER_STREAM      = aws_kinesis_stream.data_stream[2].name
     }
   }
 
@@ -48,11 +49,11 @@ resource "aws_lambda_function" "processing_lambda" {
 
 # Event source mapping for Lambda triggers
 resource "aws_lambda_event_source_mapping" "van_location_trigger" {
-  event_source_arn  = aws_kinesis_stream.data_stream[0].arn
+  event_source_arn  = aws_kinesis_stream.data_stream.arn
   function_name     = aws_lambda_function.processing_lambda.arn
   starting_position = "LATEST"
 }
-
+/*
 resource "aws_lambda_event_source_mapping" "weather_trigger" {
   event_source_arn  = aws_kinesis_stream.data_stream[1].arn
   function_name     = aws_lambda_function.processing_lambda.arn
@@ -64,3 +65,4 @@ resource "aws_lambda_event_source_mapping" "bus_location_trigger" {
   function_name     = aws_lambda_function.processing_lambda.arn
   starting_position = "LATEST"
 }
+*/
