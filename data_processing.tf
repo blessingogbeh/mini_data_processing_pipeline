@@ -1,7 +1,7 @@
 
 # Archive a processing.py into a zip file
 locals {
-  lambda_processing_function = "processing_func/package.zip"
+  lambda_processing_function = "lambda_function_dependencies.zip"
 }
 
 
@@ -27,7 +27,7 @@ resource "aws_lambda_function" "processing_lambda" {
 
   source_code_hash = filebase64sha256(local.lambda_processing_function)
 
-  runtime = "python3.9"
+  runtime = "python3.8"
 
   environment {
     variables = {
