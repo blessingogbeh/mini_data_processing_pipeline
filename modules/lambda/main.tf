@@ -5,7 +5,7 @@ data "archive_file" "data_processing" {
   output_path = var.path_to_artifact
 }
 
-resource "aws_lambda_function" "rankings_lambda" {
+resource "aws_lambda_function" "data_processing_lambda" {
   filename      = var.path_to_artifact
   function_name = var.function_name
   role          = var.lambda_iam_role_arn
@@ -27,10 +27,7 @@ environment {
       VAN_TABLE           = "van_location_data"
       PASSENGER_THRESHOLD = 50
       DELAY_THRESHOLD     = 300
-      DATA_STREAM         = aws_kinesis_stream.data_stream.name
+      DATA_STREAM         = "data_stream"
     }
   }
-
-  depends_on = [aws_iam_role_policy.lambda_policy]
-
 }
