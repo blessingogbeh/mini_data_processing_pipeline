@@ -18,3 +18,4 @@ resource "aws_lambda_event_source_mapping" "kinesis_stream_trigger" {
   function_name     = "data_processing"
   starting_position = "LATEST"
 }
+

@@ -22,7 +22,7 @@ locals {
   compatible_layer_runtimes = ["python3.11"]
   compatible_architectures  = ["x86_64"]
 
-  path_to_source_file = "./src/data_processing.py"
+  path_to_source_file = "./src/data-processing.py"
   path_to_artifact    = "./artifacts/data_processing.zip"
   function_name       = "data_processing"
   function_handler    = "data-processing.lambda_handler"
