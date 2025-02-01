@@ -37,7 +37,7 @@ def lambda_handler(event, context):
     bus_location_data = []
     van_location_data = []
     weather_data = []
-
+    print("using this file")
     # Decode the Kinesis data from base64 and load it as JSON
     data = None
     decoded_record_data = [base64.b64decode(record['kinesis']['data']) for record in event['Records']]

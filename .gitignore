@@ -5,3 +5,4 @@ infra_dpp.tf
 .terraform.tfstate.backup
 terraform.tfstate
 terraform.tfstate.backup
+aws/

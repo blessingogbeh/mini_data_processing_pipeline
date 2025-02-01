@@ -63,5 +63,5 @@ module "lambdaFunction" {
   memory_size         = local.memory_size
   timeout             = local.timeout
   runtime             = local.runtime
-  lambda_layer_arns   = [module.boto3_layer.boto3_layer_arn, module.pandas_layer.pandas_layer_arn, module.numpy_layer.numpy_layer_arn]
+  lambda_layer_arns   = [module.boto3Layer.boto3_layer_arn, module.pandasLayer.pandas_layer_arn, module.numpyLayer.numpy_layer_arn]
 }
